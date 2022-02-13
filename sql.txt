@@ -1,0 +1,122 @@
+
+The Following are the tables has to be in your database & model deisgn:-
+users
+codekata
+attendance
+topics
+tasks
+company_drives
+mentors
+students_activated_courses
+courses
+
+
+The following are the queries need to be executed:-
+
+Question 1:-
+
+1. Create tables for the above list given:-
+
+Ans:-
+
+use zen_class;
+create table users(id int auto_increment primary key,name varchar,email varchar);
+create table codekata(id int auto_increment primary key,no_of_problem int,user int,foreign key(user) references user(id));
+create table attendance (id int auto_increment primary key,date date,user int,foreign key(user) references user(id));
+create table topics(id int auto_increment primary key,topic_name varchar);
+create table tasks(id int auto_increment primary key,task_name varchar,user int,foreign key(user) references user(id));
+create table company_drives(id int auto_increment primary key,company_name varchar,user int,foreign key(user) references user(id));
+create table mentors(id int auto_increment primary key,name varchar,user int,foreign key(user) references user(id));
+create table students_activated_courses(id int auto_increment primary key,courseId int,foreign key(courseId) references course(id),user int,foreign key(user) references user(id));
+create table courses(id int auto_increment primary key,course_name varchar);
+
+
+Question 2:-
+
+2) insert at least 5 rows of values in each table:-
+
+Ans:-
+
+SELECT * FROM zen_class_db.course;
+insert into course(course_name) values("MongoDb");
+insert into course(course_name) values("Express");
+insert into course(course_name) values("React");
+insert into course(course_name) values("Node");
+insert into course(course_name) values("Javascript");
+insert into course(course_name) values("HTML");
+insert into course(course_name) values("CSS");
+
+SELECT * FROM zen_class_db.mentors;
+insert into mentors(name,user) values("Steve",1);
+insert into mentors(name,user) values("Bill",2);
+insert into mentors(name,user) values("Elon",3);
+insert into mentors(name,user) values("Jeff",4);
+insert into mentors(name,user) values("Sundhar",5);
+
+SELECT * FROM zen_class_db.tasks;
+insert into tasks(task_name,user) values("CRUDOperation",1);
+insert into tasks(task_name,user) values("Tic-Tac-Toe",2);
+insert into tasks(task_name,user) values("WeatherAPI",2);
+insert into tasks(task_name,user) values("AdminPanel",3);
+insert into tasks(task_name,user) values("StudentAttendance",3);
+insert into tasks(task_name,user) values("MongoDB",4);
+insert into tasks(task_name,user) values("Hangman",4);
+insert into tasks(task_name,user) values("SQL",5);
+
+SELECT * FROM zen_class_db.student_course;
+insert into student_course(courseId,user) values(1,1);
+insert into student_course(courseId,user) values(2,2);
+insert into student_course(courseId,user) values(2,3);
+insert into student_course(courseId,user) values(2,4);
+insert into student_course(courseId,user) values(3,5);
+insert into student_course(courseId,user) values(3,6);
+insert into student_course(courseId,user) values(4,3);
+insert into student_course(courseId,user) values(4,1);
+
+
+Question 3:-
+
+3. get number problems solved in codekata by combining the users:-
+
+Ans:-
+
+select no_of_problem,user from codekata 
+
+
+Question 4:-
+
+4. display the no of company drives attended by a user:-
+
+Ans:-
+
+select user, count(*) as count from company_drives group by user
+
+
+Question 5:-
+
+5. combine and display students_activated_courses and courses for a specific user groping them based on the course:-
+
+Ans:-
+
+select courseId ,user, count(*) from student_course group by user;
+
+
+Question 6:-
+
+6. list all the mentors:-
+
+Ans:-
+
+SELECT * FROM zen_class_db.mentors;
+
+
+Question 7:-
+
+7. list the number of students that are assigned for a mentor:-
+
+Ans:-
+
+select name, count(*) as count from mentors group by name
+
+
+
